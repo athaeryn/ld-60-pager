@@ -5,14 +5,33 @@ class_name World
 @export var player: Player
 @onready var trigger_area: Area3D = $MeshInstance3D/Area3D
 
+var messages = [
+	[
+		"       What!\nWhat are you doing\n  standing  on\n      that box?",
+		"\n     AND\n    STAY OFF!!!!!!!"
+	],
+	[
+		"   I thought I told you....\n        to STAY OFF\n    THAT BOX!!!",
+		"\n      .....\n  ............\n     better stay off"
+	],
+]
+var message_idx = 0
+
 func _ready() -> void:
 	player.set_pager_text("Current time:\n     " + get_time_string() + "\nur doing gr8\n              Keep at it! :)")
 	trigger_area.body_entered.connect(_on_trigger_entered)
+	trigger_area.body_exited.connect(_on_trigger_exited)
 	
 func _on_trigger_entered(node: Node3D) -> void:
-	print(node)
 	if node is Player:
-		node.set_pager_text("       What!\nWhat are you doing\n  standing  on\n      that box?")
+		var text = messages[min(message_idx,messages.size()-1)][0]
+		node.set_pager_text(text)
+
+func _on_trigger_exited(node: Node3D) -> void:
+	if node is Player:
+		var text = messages[min(message_idx,messages.size()-1)][1]
+		node.set_pager_text(text)
+		message_idx += 1
 
 # Exit on Escape
 func _input(_event):
