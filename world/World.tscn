@@ -20,6 +20,12 @@ fog_density = 1.0
 fog_depth_begin = 4.0
 fog_depth_end = 20.0
 
+[sub_resource type="BoxMesh" id="BoxMesh_vtsco"]
+size = Vector3(3, 1, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vtsco"]
+size = Vector3(3, 2, 3)
+
 [node name="World" type="Node3D" unique_id=332482796 node_paths=PackedStringArray("player")]
 script = ExtResource("1_1tnoa")
 player = NodePath("Player")
@@ -36,3 +42,16 @@ environment = SubResource("Environment_c6gwx")
 transform = Transform3D(0.8838963, -0.21403825, 0.4158305, -0.467683, -0.40452108, 0.7858978, 0, -0.889129, -0.4576567, 0, 6.6684546, 0)
 
 [node name="Player" parent="." unique_id=174866468 instance=ExtResource("2_1tnoa")]
+collision_layer = 3
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=123977616]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -6.3673563)
+mesh = SubResource("BoxMesh_vtsco")
+
+[node name="Area3D" type="Area3D" parent="MeshInstance3D" unique_id=1636816425]
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/Area3D" unique_id=1841648303]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("BoxShape3D_vtsco")
+debug_color = Color(0.93337053, 2.2140146e-05, 0.6469917, 0.41960785)

@@ -3,9 +3,16 @@ extends Node3D
 class_name World
 
 @export var player: Player
+@onready var trigger_area: Area3D = $MeshInstance3D/Area3D
 
 func _ready() -> void:
-	player.set_pager_text(get_time_string())
+	player.set_pager_text("Current time:\n     " + get_time_string() + "\nur doing gr8\n              Keep at it! :)")
+	trigger_area.body_entered.connect(_on_trigger_entered)
+	
+func _on_trigger_entered(node: Node3D) -> void:
+	print(node)
+	if node is Player:
+		node.set_pager_text("       What!\nWhat are you doing\n  standing  on\n      that box?")
 
 # Exit on Escape
 func _input(_event):
