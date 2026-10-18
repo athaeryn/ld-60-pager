@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://dy0fsexbdkopf"]
+
+[ext_resource type="Script" uid="uid://bujh5tkxybsmc" path="res://player/player.gd" id="1_4flbx"]
+[ext_resource type="PackedScene" uid="uid://fiofscv7kedt" path="res://pager/Pager.tscn" id="2_onrkg"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sh265"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4flbx"]
+height = 1.0
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_onrkg"]
+radius = 0.0825
+height = 0.815
+
+[node name="Player" type="CharacterBody3D" unique_id=174866468 node_paths=PackedStringArray("pager")]
+script = ExtResource("1_4flbx")
+pager = NodePath("Head/pager")
+
+[node name="StandingCollider" type="CollisionShape3D" parent="." unique_id=1578354360]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_sh265")
+debug_color = Color(0, 0.6, 0.69803923, 0.9254902)
+
+[node name="CrouchingCollider" type="CollisionShape3D" parent="." unique_id=1666321457]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("CapsuleShape3D_4flbx")
+
+[node name="StandupCheck" type="RayCast3D" parent="." unique_id=232989852]
+target_position = Vector3(0, 2, 0)
+
+[node name="Head" type="Node3D" parent="." unique_id=131840724]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.85, 0)
+
+[node name="Eyes" type="Node3D" parent="Head" unique_id=2045130285]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="PlayerCamera" type="Camera3D" parent="Head/Eyes" unique_id=2107661455]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="pager" parent="Head" unique_id=565901547 instance=ExtResource("2_onrkg")]
+transform = Transform3D(0.99488074, 0.036544446, -0.09421718, 0, 0.93232375, 0.36162463, 0.10105629, -0.35977337, 0.927551, 0.10479394, -0.12455273, -0.2712969)
+
+[node name="LowerArm" type="MeshInstance3D" parent="." unique_id=1846733443]
+transform = Transform3D(0.66940564, -0.48446757, -0.563194, 0.7407109, 0.4933754, 0.45599157, 0.056952823, -0.7224071, 0.68911844, 0.7218067, 1.041118, -0.9521548)
+visible = false
+mesh = SubResource("CapsuleMesh_onrkg")

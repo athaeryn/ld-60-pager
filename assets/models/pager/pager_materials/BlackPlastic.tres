@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://cpcle8y53msvq"]
+
+[resource]
+resource_name = "BlackPlastic"
+cull_mode = 2
+albedo_color = Color(0.038397167, 0.038397167, 0.03839716, 1)
+roughness = 0.25

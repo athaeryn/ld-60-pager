@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://dbgqe5n8q7nm0"]
+
+[resource]
+resource_name = "GreenLED"
+cull_mode = 2
+albedo_color = Color(0.6052556, 0.90633965, 0.21645088, 1)
+roughness = 0.5

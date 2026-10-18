@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://b420s7xs6mmpn"]
+
+[ext_resource type="FontFile" uid="uid://b33cro5iny2ju" path="res://assets/fonts/Doto-VariableFont_ROND,wght.ttf" id="1_re6wl"]
+[ext_resource type="Script" uid="uid://6l7qotc0knin" path="res://pager/pager_screen.gd" id="1_y5xm2"]
+
+[node name="PagerScreen" type="MarginContainer" unique_id=410938889]
+custom_minimum_size = Vector2(808, 236)
+custom_maximum_size = Vector2(808, 236)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -118.0
+offset_right = 408.0
+offset_bottom = 118.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+script = ExtResource("1_y5xm2")
+
+[node name="Label" type="Label" parent="." unique_id=524227676]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -6
+theme_override_constants/paragraph_spacing = 6
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("1_re6wl")
+theme_override_font_sizes/font_size = 46
+text = "test line  test line  test li
+    1:14 AM     10/18/26
+test line  test line  test li
+test line  test line  test li"
+clip_text = true
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=793076539]
+position = Vector2(400, 120)

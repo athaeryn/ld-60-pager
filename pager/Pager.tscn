@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://fiofscv7kedt"]
+
+[ext_resource type="Script" uid="uid://cc1liqdr8ou82" path="res://pager/pager.gd" id="1_n7dv1"]
+[ext_resource type="PackedScene" uid="uid://dys768lo3q8md" path="res://assets/models/pager/pager.glb" id="1_q5017"]
+[ext_resource type="PackedScene" uid="uid://b420s7xs6mmpn" path="res://pager/pager_screen.tscn" id="2_0y8jj"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_btu8c"]
+viewport_path = NodePath("ScreenSprite3D/SubViewport")
+
+[node name="Pager" type="Node3D" unique_id=565901547 node_paths=PackedStringArray("screen")]
+script = ExtResource("1_n7dv1")
+screen = NodePath("ScreenSprite3D/SubViewport/PagerScreen")
+
+[node name="pager" parent="." unique_id=548935115 instance=ExtResource("1_q5017")]
+transform = Transform3D(0.04, 0, 0, 0, 0.04, 0, 0, 0, 0.04, 0, 0, 0)
+
+[node name="ScreenSprite3D" type="Sprite3D" parent="." unique_id=939968450]
+transform = Transform3D(0.018, 0, 0, 0, 0.018, 0, 0, 0, 0.018, -0.0024734512, 0.016508292, 0.008533001)
+texture = SubResource("ViewportTexture_btu8c")
+
+[node name="SubViewport" type="SubViewport" parent="ScreenSprite3D" unique_id=1950990870]
+disable_3d = true
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(808, 236)
+render_target_update_mode = 4
+
+[node name="PagerScreen" parent="ScreenSprite3D/SubViewport" unique_id=410938889 instance=ExtResource("2_0y8jj")]

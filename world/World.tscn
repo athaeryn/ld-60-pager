@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://c6llxk318k8cm"]
+
+[ext_resource type="Script" uid="uid://djtj1xhagmjfa" path="res://world/world.gd" id="1_1tnoa"]
+[ext_resource type="PackedScene" uid="uid://dy0fsexbdkopf" path="res://player/player.tscn" id="2_1tnoa"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_c6gwx"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cmany"]
+
+[sub_resource type="Sky" id="Sky_gttat"]
+sky_material = SubResource("ProceduralSkyMaterial_cmany")
+
+[sub_resource type="Environment" id="Environment_c6gwx"]
+background_mode = 2
+sky = SubResource("Sky_gttat")
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0.16953555, 0.14848429, 0.22029918, 1)
+fog_density = 1.0
+fog_depth_begin = 4.0
+fog_depth_end = 20.0
+
+[node name="World" type="Node3D" unique_id=332482796 node_paths=PackedStringArray("player")]
+script = ExtResource("1_1tnoa")
+player = NodePath("Player")
+
+[node name="Bedrock" type="StaticBody3D" parent="." unique_id=701639062]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bedrock" unique_id=76029347]
+shape = SubResource("WorldBoundaryShape3D_c6gwx")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1312116629]
+environment = SubResource("Environment_c6gwx")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment" unique_id=1283328269]
+transform = Transform3D(0.8838963, -0.21403825, 0.4158305, -0.467683, -0.40452108, 0.7858978, 0, -0.889129, -0.4576567, 0, 6.6684546, 0)
+
+[node name="Player" parent="." unique_id=174866468 instance=ExtResource("2_1tnoa")]
