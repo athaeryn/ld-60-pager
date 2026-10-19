@@ -16,7 +16,7 @@ height = 0.815
 
 [node name="Player" type="CharacterBody3D" unique_id=174866468 node_paths=PackedStringArray("pager")]
 script = ExtResource("1_4flbx")
-pager = NodePath("Head/pager")
+pager = NodePath("Head/Hand/pager")
 
 [node name="StandingCollider" type="CollisionShape3D" parent="." unique_id=1578354360]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -39,7 +39,10 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0
 [node name="PlayerCamera" type="Camera3D" parent="Head/Eyes" unique_id=2107661455]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 
-[node name="pager" parent="Head" unique_id=565901547 instance=ExtResource("2_onrkg")]
+[node name="Hand" type="Node3D" parent="Head" unique_id=1967495982]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+
+[node name="pager" parent="Head/Hand" unique_id=565901547 instance=ExtResource("2_onrkg")]
 transform = Transform3D(0.99488074, 0.036544446, -0.09421718, 0, 0.93232375, 0.36162463, 0.10105629, -0.35977337, 0.927551, 0.10479394, -0.12455273, -0.2712969)
 
 [node name="LowerArm" type="MeshInstance3D" parent="." unique_id=1846733443]

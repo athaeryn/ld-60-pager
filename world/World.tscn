@@ -3,7 +3,8 @@
 [ext_resource type="Script" uid="uid://djtj1xhagmjfa" path="res://world/world.gd" id="1_1tnoa"]
 [ext_resource type="PackedScene" uid="uid://dy0fsexbdkopf" path="res://player/player.tscn" id="2_1tnoa"]
 [ext_resource type="PackedScene" uid="uid://8ke08auhk3xg" path="res://assets/models/house_test03.glb" id="3_qcaji"]
-[ext_resource type="PackedScene" uid="uid://bash45eyshl3y" path="res://assets/models/scarecrow/Scarecrow.glb" id="4_5hvw7"]
+[ext_resource type="PackedScene" uid="uid://dys768lo3q8md" path="res://assets/models/pager/pager.glb" id="4_5hvw7"]
+[ext_resource type="PackedScene" uid="uid://bash45eyshl3y" path="res://assets/models/scarecrow/Scarecrow.glb" id="5_ahhnx"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_c6gwx"]
 
@@ -34,6 +35,8 @@ size = Vector3(3, 1, 3)
 [sub_resource type="BoxShape3D" id="BoxShape3D_vtsco"]
 size = Vector3(3, 2, 3)
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gdclf"]
+
 [node name="World" type="Node3D" unique_id=332482796 node_paths=PackedStringArray("player")]
 script = ExtResource("1_1tnoa")
 player = NodePath("Player")
@@ -56,6 +59,7 @@ light_color = Color(0.28565744, 0.45946258, 0.44515347, 1)
 sky_mode = 1
 
 [node name="Player" parent="." unique_id=174866468 instance=ExtResource("2_1tnoa")]
+transform = Transform3D(-0.9717315, 0, 0.23608878, 0, 1, 0, -0.23608878, 0, -0.9717315, -14, 0, 13.506012)
 collision_layer = 3
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=123977616]
@@ -75,5 +79,14 @@ debug_color = Color(0.93337053, 2.2140146e-05, 0.6469917, 0.41960785)
 
 [node name="StageTimer" type="Timer" parent="." unique_id=208689303]
 
-[node name="Scarecrow2" parent="." unique_id=1297867461 instance=ExtResource("4_5hvw7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6650335, 0.0038477778, 9.032495)
+[node name="PagerPickupArea3D" type="Area3D" parent="." unique_id=410840062]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.350346, 0.8443397, -1.9708196)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PagerPickupArea3D" unique_id=1397789464]
+shape = SubResource("CapsuleShape3D_gdclf")
+
+[node name="pager" parent="." unique_id=604814313 instance=ExtResource("4_5hvw7")]
+transform = Transform3D(0.032473132, 0.02335585, 1.0209167e-09, 0, -1.7484556e-09, 0.04, 0.02335585, -0.032473132, -1.4194458e-09, -12.350346, 0.8443397, -1.9708196)
+
+[node name="Scarecrow2" parent="." unique_id=1297867461 instance=ExtResource("5_ahhnx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6295565, 0.0040861964, 8.6042595)
