@@ -4,6 +4,8 @@ class_name World
 
 @export var player: Player
 @onready var trigger_area: Area3D = $MeshInstance3D/Area3D
+@onready var pager_pickup_area_3d: Area3D = $PagerPickupArea3D
+@onready var pager_on_counter = $pager
 
 var messages = [
 	[
@@ -16,11 +18,23 @@ var messages = [
 	],
 ]
 var message_idx = 0
+var picked_up_pager = false
 
 func _ready() -> void:
 	player.set_pager_text("Current time:\n" + get_time_string() + "\nur doing gr8\n              Keep at it! :)")
 	trigger_area.body_entered.connect(_on_trigger_entered)
 	trigger_area.body_exited.connect(_on_trigger_exited)
+	pager_pickup_area_3d.body_entered.connect(_pick_up_pager)
+	
+func _pick_up_pager(node: Node3D) -> void:
+	if node is Player and !picked_up_pager:
+		picked_up_pager = true
+		print("pick up")
+		pager_on_counter.queue_free()
+		pager_pickup_area_3d.queue_free()
+		player.set_pager_raised(false)
+		
+	
 	
 func _on_trigger_entered(node: Node3D) -> void:
 	if node is Player:

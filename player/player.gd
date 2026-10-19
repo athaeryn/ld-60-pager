@@ -8,6 +8,7 @@ class_name Player
 @onready var standing_collider = $StandingCollider
 @onready var crouching_collider = $CrouchingCollider
 @onready var standup_check = $StandupCheck
+@onready var hand = $Head/Hand
 
 
 @export var pager: Pager
@@ -45,7 +46,8 @@ var direction: Vector3 = Vector3.ZERO
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	
+	hand.position = Vector3(0, -0.2, 0)
+
 func _input(event: InputEvent) -> void:
 	if event is InputEventJoypadMotion:
 		rotate_y(deg_to_rad(-Input.get_axis("look_left", "look_right") * CAMERA_SENSITIVITY * 4.0))
@@ -55,12 +57,12 @@ func _input(event: InputEvent) -> void:
 		rotate_y(deg_to_rad(-event.relative.x * CAMERA_SENSITIVITY))
 		head.rotate_x(deg_to_rad(-event.relative.y * CAMERA_SENSITIVITY))
 		head.rotation.x = clamp(head.rotation.x, deg_to_rad(CAMERA_MAX_HEAD_DOWN), deg_to_rad(CAMERA_MAX_HEAD_UP))
-	
+
 
 func _physics_process(delta):
 	updatePlayerState()
 	#updatePlayerCamera(delta)
-	
+
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -88,6 +90,12 @@ func _physics_process(delta):
 	
 func set_pager_text(text: String) -> void:
 	pager.set_text(text)
+
+func set_pager_raised(raised: bool) -> void:
+	if raised:
+		hand.position = Vector3(0, 0, 0)
+	else:
+		hand.position = Vector3(0, -0.125, 0)
 
 func updatePlayerState():
 	moving = (input_dir != Vector2.ZERO)
