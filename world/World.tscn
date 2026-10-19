@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://djtj1xhagmjfa" path="res://world/world.gd" id="1_1tnoa"]
 [ext_resource type="PackedScene" uid="uid://dy0fsexbdkopf" path="res://player/player.tscn" id="2_1tnoa"]
-[ext_resource type="PackedScene" uid="uid://drbqj2c0yfmhy" path="res://assets/models/house_test02.glb" id="3_qcaji"]
+[ext_resource type="PackedScene" uid="uid://8ke08auhk3xg" path="res://assets/models/house_test03.glb" id="3_qcaji"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_c6gwx"]
 
@@ -18,9 +18,10 @@ sky = SubResource("Sky_gttat")
 fog_enabled = true
 fog_mode = 1
 fog_light_color = Color(0.3948, 0.47, 0.46373332, 1)
-fog_density = 0.8
-fog_depth_begin = 20.0
-fog_depth_end = 40.0
+fog_density = 0.95
+fog_height_density = 0.544
+fog_depth_begin = 2.0
+fog_depth_end = 80.0
 
 [sub_resource type="BoxMesh" id="BoxMesh_vtsco"]
 size = Vector3(3, 1, 3)
@@ -48,6 +49,7 @@ collision_layer = 3
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=123977616]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.2250547, -0.5, 26.650158)
+visible = false
 mesh = SubResource("BoxMesh_vtsco")
 
 [node name="Area3D" type="Area3D" parent="MeshInstance3D" unique_id=1636816425]
@@ -58,4 +60,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 shape = SubResource("BoxShape3D_vtsco")
 debug_color = Color(0.93337053, 2.2140146e-05, 0.6469917, 0.41960785)
 
-[node name="house_test02" parent="." unique_id=62742603 instance=ExtResource("3_qcaji")]
+[node name="house_test03" parent="." unique_id=805221782 instance=ExtResource("3_qcaji")]
