@@ -7,6 +7,10 @@
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_c6gwx"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cmany"]
+sky_top_color = Color(0.3640151, 0.31954682, 0.51760995, 1)
+sky_horizon_color = Color(0.43029353, 0.31789717, 0.4059762, 1)
+sky_energy_multiplier = 0.6
+ground_bottom_color = Color(0.12916139, 0.19516233, 0.08960088, 1)
 
 [sub_resource type="Sky" id="Sky_gttat"]
 sky_material = SubResource("ProceduralSkyMaterial_cmany")
@@ -15,13 +19,13 @@ sky_material = SubResource("ProceduralSkyMaterial_cmany")
 background_mode = 2
 background_energy_multiplier = 0.7
 sky = SubResource("Sky_gttat")
-fog_enabled = true
 fog_mode = 1
 fog_light_color = Color(0.3948, 0.47, 0.46373332, 1)
 fog_density = 0.95
 fog_height_density = 0.544
 fog_depth_begin = 2.0
 fog_depth_end = 80.0
+volumetric_fog_enabled = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_vtsco"]
 size = Vector3(3, 1, 3)
@@ -43,6 +47,12 @@ environment = SubResource("Environment_c6gwx")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment" unique_id=1283328269]
 transform = Transform3D(-0.8837817, 0.22832263, -0.40840992, -0.46768296, -0.40452105, 0.78589773, 0.014227756, 0.8855684, 0.46429098, 0, 15.948097, 0)
+sky_mode = 2
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="WorldEnvironment" unique_id=634798047]
+transform = Transform3D(-0.8837818, 0.22832255, -0.4084099, -0.46768302, -0.40452114, 0.78589773, 0.014227758, 0.88556844, 0.464291, 0, 15.948097, -2.8546553)
+light_color = Color(0.28565744, 0.45946258, 0.44515347, 1)
+sky_mode = 1
 
 [node name="Player" parent="." unique_id=174866468 instance=ExtResource("2_1tnoa")]
 collision_layer = 3
@@ -61,3 +71,5 @@ shape = SubResource("BoxShape3D_vtsco")
 debug_color = Color(0.93337053, 2.2140146e-05, 0.6469917, 0.41960785)
 
 [node name="house_test03" parent="." unique_id=805221782 instance=ExtResource("3_qcaji")]
+
+[node name="StageTimer" type="Timer" parent="." unique_id=208689303]

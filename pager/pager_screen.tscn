@@ -4,16 +4,16 @@
 [ext_resource type="Script" uid="uid://6l7qotc0knin" path="res://pager/pager_screen.gd" id="1_y5xm2"]
 
 [node name="PagerScreen" type="MarginContainer" unique_id=410938889]
-custom_minimum_size = Vector2(808, 236)
-custom_maximum_size = Vector2(808, 236)
+custom_minimum_size = Vector2(840, 236)
+custom_maximum_size = Vector2(840, 236)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -400.0
+offset_left = -400.03003
 offset_top = -118.0
-offset_right = 408.0
+offset_right = 412.96997
 offset_bottom = 118.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -38,8 +38,8 @@ theme_override_fonts/font = ExtResource("1_re6wl")
 theme_override_font_sizes/font_size = 46
 text = "test line  test line  test li
     1:14 AM     10/18/26
-test line  test line  test li
-test line  test line  test li"
+test line  test line  test lin
+test line  test line  test line"
 clip_text = true
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=793076539]
