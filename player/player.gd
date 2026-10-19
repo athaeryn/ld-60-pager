@@ -44,11 +44,18 @@ var moving := false
 var input_dir: Vector2 = Vector2.ZERO
 var direction: Vector3 = Vector3.ZERO
 
+var controlled = false
+
+func set_controlled(c: bool) -> void:
+	controlled = c
+
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	hand.position = Vector3(0, -0.2, 0)
 
 func _input(event: InputEvent) -> void:
+	if controlled:
+		return
 	if event is InputEventJoypadMotion:
 		rotate_y(deg_to_rad(-Input.get_axis("look_left", "look_right") * CAMERA_SENSITIVITY * 4.0))
 		head.rotate_x(deg_to_rad(-Input.get_axis("look_up", "look_down") * CAMERA_SENSITIVITY * 2.0))
@@ -60,6 +67,8 @@ func _input(event: InputEvent) -> void:
 
 
 func _physics_process(delta):
+	if controlled:
+		return
 	updatePlayerState()
 	#updatePlayerCamera(delta)
 
@@ -73,20 +82,21 @@ func _physics_process(delta):
 			velocity.y += get_gravity().y * delta
 		else:
 			velocity.y += get_gravity().y * delta * 2.0
-	elif Input.is_action_just_pressed("jump"):
+	elif not controlled and Input.is_action_just_pressed("jump"):
 		velocity.y = JUMP_VELOCITY
+	
+	if not controlled:
+		input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
+		var lerp_factor := 6.0 if moving else 10.0
+		direction = lerp(direction, (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized(), delta * lerp_factor)
+		if direction:
+			velocity.x = direction.x * current_speed
+			velocity.z = direction.z * current_speed
+		else:
+			velocity.x = move_toward(velocity.x, 0.0, current_speed)
+			velocity.z = move_toward(velocity.z, 0.0, current_speed)
 
-	input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
-	var lerp_factor := 6.0 if moving else 10.0
-	direction = lerp(direction, (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized(), delta * lerp_factor)
-	if direction:
-		velocity.x = direction.x * current_speed
-		velocity.z = direction.z * current_speed
-	else:
-		velocity.x = move_toward(velocity.x, 0.0, current_speed)
-		velocity.z = move_toward(velocity.z, 0.0, current_speed)
-
-	move_and_slide()
+		move_and_slide()
 	
 func set_pager_text(text: String) -> void:
 	pager.set_text(text)
@@ -101,7 +111,7 @@ func updatePlayerState():
 	moving = (input_dir != Vector2.ZERO)
 	if not is_on_floor():
 		current_state = State.AIR  
-	else:
+	elif not controlled:
 		if Input.is_action_pressed("crouch"):
 			if not moving:
 				current_state = State.IDLE_CROUCH
@@ -141,6 +151,8 @@ func updatePlayerSpeed(state):
 
 
 func updatePlayerCamera(delta: float):
+	if controlled:
+		return
 	match current_state:
 		State.IDLE_STAND or State.WALK_STANDING:
 			head.position.y = lerp(head.position.y, CAMERA_HEIGHT_STANDING, delta * 10.0)
