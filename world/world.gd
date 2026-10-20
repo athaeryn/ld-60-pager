@@ -4,24 +4,13 @@ class_name World
 
 @export var player: Player
 @export var scarecrow: Scarecrow
-@onready var trigger_area: Area3D = $MeshInstance3D/Area3D
 @onready var pager_pickup_area_3d: Area3D = $PagerPickupArea3D
 @onready var pager_on_counter = $pager
 @onready var house_area_3d: Area3D = $HouseArea3D
+@onready var auto_kill_timer = $AutoKillTimer
 
 @export var message_triggers : Array[Area3D]
 
-var messages = [
-	[
-		"       What!\nWhat are you doing\n  standing  on\n      that box?",
-		"\n     AND\n    STAY OFF!!!!!!!"
-	],
-	[
-		"   I thought I told you....\n        to STAY OFF\n    THAT BOX!!!",
-		"\n      .....\n  ............\n     better stay off"
-	],
-]
-var message_idx = 0
 var picked_up_pager = false
 
 func _ready() -> void:
@@ -30,10 +19,9 @@ func _ready() -> void:
 		t.body_entered.connect(_on_message_trigger.bind(t))
 		
 	#player.set_pager_text("Current time:\n" + get_time_string() + "\nur doing gr8\n              Keep at it! :)")
-	trigger_area.body_entered.connect(_on_trigger_entered)
-	trigger_area.body_exited.connect(_on_trigger_exited)
 	pager_pickup_area_3d.body_entered.connect(_pick_up_pager)
 	house_area_3d.body_exited.connect(scarecrow_kill_sequence)
+	auto_kill_timer.timeout.connect(auto_kill)
 	
 func _on_message_trigger(node: Node3D, area: Area3D) -> void:
 	if node is Player:
@@ -59,16 +47,9 @@ func scarecrow_kill_sequence(node: Node3D) -> void:
 		scarecrow.look_at(player.global_position, Vector3.UP)
 		scarecrow.play_kill_animation()
 
-func _on_trigger_entered(node: Node3D) -> void:
-	if node is Player:
-		var text = messages[min(message_idx,messages.size()-1)][0]
-		node.set_pager_text(text)
+func auto_kill() -> void:
+	scarecrow_kill_sequence(player)
 
-func _on_trigger_exited(node: Node3D) -> void:
-	if node is Player:
-		var text = messages[min(message_idx,messages.size()-1)][1]
-		node.set_pager_text(text)
-		message_idx += 1
 
 # Exit on Escape
 func _input(_event):
