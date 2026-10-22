@@ -7,8 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://ckmadne51ghnj" path="res://scarecrow/Scarecrow.tscn" id="5_ahhnx"]
 [ext_resource type="AudioStream" uid="uid://dek6c0snf32uf" path="res://assets/audio/alex-morgan-ambient-horror-creepy-atmosphere-dark-587402.mp3" id="6_0wlj7"]
 [ext_resource type="AudioStream" uid="uid://dcnlc4kamfp8j" path="res://assets/audio/ALRMElec_Digital_pagerID_3513.mp3" id="6_dodpj"]
-
-[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_c6gwx"]
+[ext_resource type="AudioStream" uid="uid://b506ohiy4gtn0" path="res://assets/audio/orchestra-suspended-accent-stab-1-311359.mp3" id="8_crsqw"]
+[ext_resource type="AudioStream" uid="uid://dla53eui6irnl" path="res://assets/audio/universfield-blade-piercing-body-352462.mp3" id="9_8mymi"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cmany"]
 sky_top_color = Color(0.3640151, 0.31954682, 0.51760995, 1)
@@ -45,17 +45,6 @@ player = NodePath("Player")
 scarecrow = NodePath("Scarecrow")
 message_triggers = [NodePath("NoEscape")]
 
-[node name="Bedrock" type="StaticBody3D" parent="." unique_id=701639062]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Bedrock" unique_id=76029347]
-shape = SubResource("WorldBoundaryShape3D_c6gwx")
-
-[node name="BGAudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=56104605]
-stream = ExtResource("6_0wlj7")
-volume_db = -16.0
-autoplay = true
-parameters/looping = true
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1312116629]
 environment = SubResource("Environment_c6gwx")
 
@@ -67,6 +56,18 @@ sky_mode = 2
 transform = Transform3D(-0.8837818, 0.22832255, -0.4084099, -0.46768302, -0.40452114, 0.78589773, 0.014227758, 0.88556844, 0.464291, 0, 15.948097, -2.8546553)
 light_color = Color(0.28565744, 0.45946258, 0.44515347, 1)
 sky_mode = 1
+
+[node name="BGAudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=56104605]
+stream = ExtResource("6_0wlj7")
+volume_db = -16.0
+autoplay = true
+parameters/looping = true
+
+[node name="KillMusic" type="AudioStreamPlayer" parent="." unique_id=999884429]
+stream = ExtResource("8_crsqw")
+
+[node name="KnifeStabSFX" type="AudioStreamPlayer" parent="KillMusic" unique_id=153625896]
+stream = ExtResource("9_8mymi")
 
 [node name="Player" parent="." unique_id=174866468 instance=ExtResource("2_1tnoa")]
 transform = Transform3D(-0.9717315, 0, 0.23608878, 0, 1, 0, -0.23608878, 0, -0.9717315, -14, 0, 13.506012)
@@ -88,9 +89,10 @@ shape = SubResource("CapsuleShape3D_gdclf")
 transform = Transform3D(0.032473132, 0.02335585, 1.0209167e-09, 0, -1.7484556e-09, 0.04, 0.02335585, -0.032473132, -1.4194458e-09, -12.350346, 0.8443397, -1.9708196)
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="pager" unique_id=2522538]
+transform = Transform3D(25, 0, 0, 0, 25, -1.1368684e-13, 5.684342e-14, -5.684342e-14, 25.000002, 0, 0, 0)
 stream = ExtResource("6_dodpj")
 attenuation_model = 1
-volume_db = -12.0
+volume_db = -18.0
 max_db = -6.0
 autoplay = true
 parameters/looping = true
